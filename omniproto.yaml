@@ -1,7 +1,13 @@
-protorepo: protorepo-example
-sources:
-  - grpckit/accounts/accounts.proto
-  - grpckit/books/books.proto
+rootdir: protorepo-example # protorepo is the default root dir
+sources: #all files will be passed together
+  - grpckit/accounts/accounts.proto # you can specify specific files ending with .proto
+  - grpckit/books # anything not ending in .proto is considered a directory, and will be searched for proto files
   - grpckit/base.proto
+output: .gen # .gen is the default output directory
 plugins:
-  - go
+- name: go
+  output: .gen-go # you can override outputs on a per-plugin basis
+descriptors:
+  enable: true # defaults to true, descriptors are useful
+  source: true
+  comments: true
