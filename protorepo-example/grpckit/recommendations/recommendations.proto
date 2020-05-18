@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package recommendations;
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "grpckit/recommendations/user.proto";
+
+// Service Recommendations is a microservice backend for recommendation entries.
+service Recommendations {
+  // ListRecommendations lists all recommendations
+  rpc ListRecommendations(ListRecommendationsRequest)
+      returns (ListRecommendationsResponse) {
+    option (google.api.http) = {
+      get : "/recommendations"
+    };
+  }
+
+  // GetRecommendation returns a single recommendation based on an id
+  rpc GetRecommendation(GetRecommendationRequest) returns (Recommendation) {
+    option (google.api.http) = {
+      get : "/recommendations/{id}"
+    };
+  }
+
+  // CreateRecommendation creates a new recommendation and returns the
+  // created recommendation with an id
+  rpc CreateRecommendation(CreateRecommendationRequest)
+      returns (Recommendation) {
+    option (google.api.http) = {
+      post : "/recommendations"
+      body : "recommendation"
+    };
+  }
+
+  // UpdateRecommendation updates a recommendation
+  rpc UpdateRecommendation(UpdateRecommendationRequest)
+      returns (Recommendation) {
+    option (google.api.http) = {
+      patch : "/recommendations/{recommendation.id}"
+      body : "recommendation"
+    };
+  }
+
+  // DeleteRecommendation deletes a recommendation in the system
+  rpc DeleteRecommendation(DeleteRecommendationRequest)
+      returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/recommendations/{id}"
+    };
+  }
+
+  // DeleteAllRecommendations deletes all recommendations in the system
+  rpc DeleteAllRecommendations(google.protobuf.Empty)
+      returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/recommendations"
+    };
+  }
+}
+
+// Recommendation represents a single recommendation item. It has an id
+// and user
+message Recommendation {
+  // ID is the ID of the Recommendation
+  string id = 1;
+  User = 2;
+}
+
+message ListRecommendationsRequest {}
+
+message ListRecommendationsResponse {
+  repeated Recommendation recommendations = 1;
+}
+
+message GetRecommendationRequest { string id = 1; }
+
+message DeleteRecommendationRequest { string id = 1; }
+
+message CreateRecommendationRequest {
+  // recommendation is the recommendation to create. The ID
+  // will be set automatically.
+  Recommendation recommendation = 1;
+}
+
+message UpdateRecommendationRequest { Recommendation recommendation = 1; }

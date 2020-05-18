@@ -1,0 +1,9 @@
+// user represents a single account item. It has an id,
+// name and active flag
+message User {
+    // ID is the ID of the User
+    string id = 1;
+    // name is a text field describing the account
+    string name = 2;
+    bool active = 4;
+  }

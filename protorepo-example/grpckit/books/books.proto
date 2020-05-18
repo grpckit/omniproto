@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package books;
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "grpckit/books/user.proto";
+
+// Service Books is a microservice backend for book entries.
+service Books {
+  // ListBooks lists all books
+  rpc ListBooks(ListBooksRequest) returns (ListBooksResponse) {
+    option (google.api.http) = {
+      get : "/books"
+    };
+  }
+
+  // GetBook returns a single book based on an id
+  rpc GetBook(GetBookRequest) returns (Book) {
+    option (google.api.http) = {
+      get : "/books/{id}"
+    };
+  }
+
+  // CreateBook creates a new book and returns the
+  // created book with an id
+  rpc CreateBook(CreateBookRequest) returns (Book) {
+    option (google.api.http) = {
+      post : "/books"
+      body : "book"
+    };
+  }
+
+  // UpdateBook updates a book
+  rpc UpdateBook(UpdateBookRequest) returns (Book) {
+    option (google.api.http) = {
+      patch : "/books/{book.id}"
+      body : "book"
+    };
+  }
+
+  // DeleteBook deletes a book in the system
+  rpc DeleteBook(DeleteBookRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/books/{id}"
+    };
+  }
+
+  // DeleteAllBooks deletes all books in the system
+  rpc DeleteAllBooks(google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/books"
+    };
+  }
+}
+
+// Book represents a single book item. It has an id
+// and user
+message Book {
+  // ID is the ID of the Book
+  string id = 1;
+  User = 2;
+}
+
+message ListBooksRequest {}
+
+message ListBooksResponse { repeated Book books = 1; }
+
+message GetBookRequest { string id = 1; }
+
+message DeleteBookRequest { string id = 1; }
+
+message CreateBookRequest {
+  // book is the book to create. The ID
+  // will be set automatically.
+  Book book = 1;
+}
+
+message UpdateBookRequest { Book book = 1; }
