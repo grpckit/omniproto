@@ -1,0 +1,7 @@
+// Base just does its thing
+message Base {
+  // ID is the ID of the User
+  string id = 1;
+  // name is a text field describing the account
+  string name = 2;
+}
