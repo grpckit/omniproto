@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package accounts;
+
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+import "grpckit/accounts/user.proto";
+
+// Service Accounts is a microservice backend for account entries.
+service Accounts {
+  // ListAccounts lists all accounts
+  rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
+    option (google.api.http) = {
+      get : "/accounts"
+    };
+  }
+
+  // GetAccount returns a single account based on an id
+  rpc GetAccount(GetAccountRequest) returns (Account) {
+    option (google.api.http) = {
+      get : "/accounts/{id}"
+    };
+  }
+
+  // CreateAccount creates a new account and returns the
+  // created account with an id
+  rpc CreateAccount(CreateAccountRequest) returns (Account) {
+    option (google.api.http) = {
+      post : "/accounts"
+      body : "account"
+    };
+  }
+
+  // UpdateAccount updates a account
+  rpc UpdateAccount(UpdateAccountRequest) returns (Account) {
+    option (google.api.http) = {
+      patch : "/accounts/{account.id}"
+      body : "account"
+    };
+  }
+
+  // DeleteAccount deletes a account in the system
+  rpc DeleteAccount(DeleteAccountRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/accounts/{id}"
+    };
+  }
+
+  // DeleteAllAccounts deletes all accounts in the system
+  rpc DeleteAllAccounts(google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete : "/accounts"
+    };
+  }
+}
+
+// Account represents a single account item. It has an id
+// and user
+message Account {
+  // ID is the ID of the Account
+  string id = 1;
+  User = 2;
+}
+
+message ListAccountsRequest {}
+
+message ListAccountsResponse { repeated Account accounts = 1; }
+
+message GetAccountRequest { string id = 1; }
+
+message DeleteAccountRequest { string id = 1; }
+
+message CreateAccountRequest {
+  // account is the account to create. The ID
+  // will be set automatically.
+  Account account = 1;
+}
+
+message UpdateAccountRequest { Account account = 1; }
