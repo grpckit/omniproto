@@ -1,0 +1,7 @@
+protorepo: protorepo-example
+sources:
+  - grpckit/accounts/accounts.proto
+  - grpckit/books/books.proto
+  - grpckit/base.proto
+plugins:
+  - go
