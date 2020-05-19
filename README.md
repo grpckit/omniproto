@@ -2,6 +2,14 @@
 
 [WIP] Omniproto makes your generating gRPC code from protorepo easy.
 
+## Running
+
+Omniproto is bundled with [grpckit](https://github.com/grpckit/grpckit), an all-in-one docker container with a variety of plugins installed. In your grpc service repository, simply
+submodule your protorepo, add an `omniproto.yaml` config file,
+and a docker execute step as part of your toolchain:
+
+`docker run -v $(pwd):/workspace --rm grpckit/omniproto`
+
 ## How It Works
 
 `omniproto` is designed to work with a protorepo, meaning you or your
