@@ -22,6 +22,7 @@ func TestCanGenerateFromExampleConfig(t *testing.T) {
 	assert.Contains(t, result, "grpckit/accounts/user.proto")
 	assert.Contains(t, result, "grpckit/base.proto")
 	assert.Contains(t, result, "--descriptor_set_out")
+	assert.Contains(t, result, "--validate_out=lang=go:gen")
 }
 
 func genConfig(t *testing.T, input []byte) *Config {

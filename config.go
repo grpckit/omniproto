@@ -17,6 +17,7 @@ type Descriptors struct {
 type Plugin struct {
 	Name   string
 	Output string
+	Args   string
 }
 
 // Config represents an omniproto configuration

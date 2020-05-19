@@ -5,8 +5,10 @@ sources: # all sources will be passed together
   - grpckit/base.proto
 output: gen # gen is the default output directory (should be gitignored)
 plugins:
-- name: go
+- name: go # the name of the plugin will be suffixed with _out, i.e. go_out.
   output: .gen-go # you can override outputs on a per-plugin basis
+- name: validate
+  args: lang=go # args will be passed in to the plugin flag
 descriptors:
   output: gen/descriptors.pb # defaults to descriptors.pb in root output directory
   enabled: true # defaults to true, descriptors are useful

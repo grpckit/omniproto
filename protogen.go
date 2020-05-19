@@ -20,7 +20,7 @@ func GenProtoString(config *Config) string {
 	b.WriteString(fmt.Sprintf("-I%v%v", config.RootDir, space))
 
 	for _, plugin := range config.Plugins {
-		b.WriteString(fmt.Sprintf("--%v_out=%v%v", plugin.Name, getOutputForPlugin(plugin, config), space))
+		b.WriteString(fmt.Sprintf("--%v_out=%v%v%v", plugin.Name, getArgs(plugin), getOutputForPlugin(plugin, config), space))
 	}
 
 	if config.Descriptors.Enabled {
@@ -41,6 +41,13 @@ func GenProtoString(config *Config) string {
 	writeSources(config, &b)
 
 	return b.String()
+}
+
+func getArgs(plugin Plugin) string {
+	if len(plugin.Args) > 0 {
+		return fmt.Sprintf("%v:", plugin.Args)
+	}
+	return ""
 }
 
 func writeSources(config *Config, b *strings.Builder) {
