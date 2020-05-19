@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"testing"
 
 	"github.com/spf13/viper"
@@ -17,8 +16,12 @@ func TestCanGenerateFromExampleConfig(t *testing.T) {
 	result := GenProtoString(config)
 	assert.NotEmpty(t, result)
 
-	fmt.Println(result)
-
+	assert.Contains(t, result, "-Iprotorepo-example")
+	assert.Contains(t, result, "--go_out=.gen-go")
+	assert.Contains(t, result, "--include_imports")
+	assert.Contains(t, result, "grpckit/accounts/user.proto")
+	assert.Contains(t, result, "grpckit/base.proto")
+	assert.Contains(t, result, "--descriptor_set_out")
 }
 
 func genConfig(t *testing.T, input []byte) *Config {
