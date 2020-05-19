@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package accounts;
 
+option go_package = "github.com/grpckit/omniproto/gen";
+
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "grpckit/accounts/user.proto";
@@ -59,7 +61,7 @@ service Accounts {
 message Account {
   // ID is the ID of the Account
   string id = 1;
-  User = 2;
+  User user = 2;
 }
 
 message ListAccountsRequest {}

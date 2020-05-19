@@ -1,6 +1,6 @@
 # omniproto
 
-Omniproto makes your generating gRPC code from protorepo easy.
+[WIP] Omniproto makes your generating gRPC code from protorepo easy.
 
 ## How It Works
 

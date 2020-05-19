@@ -2,9 +2,10 @@ syntax = "proto3";
 
 package books;
 
+option go_package = "github.com/grpckit/omniproto/gen";
+
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
-import "grpckit/books/user.proto";
 
 // Service Books is a microservice backend for book entries.
 service Books {
@@ -59,7 +60,8 @@ service Books {
 message Book {
   // ID is the ID of the Book
   string id = 1;
-  User = 2;
+  string author = 2;
+  string title = 3;
 }
 
 message ListBooksRequest {}
