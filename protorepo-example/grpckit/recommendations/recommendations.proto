@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package recommendations;
 
+option go_package = "github.com/grpckit/omniproto/gen";
+
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "grpckit/recommendations/user.proto";
@@ -64,7 +66,8 @@ service Recommendations {
 message Recommendation {
   // ID is the ID of the Recommendation
   string id = 1;
-  User = 2;
+  string book_id = 2;
+  int rating = 3;
 }
 
 message ListRecommendationsRequest {}

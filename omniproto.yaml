@@ -1,13 +1,16 @@
 rootdir: protorepo-example # protorepo is the default root dir
-sources: #all files will be passed together
-  - grpckit/accounts/accounts.proto # you can specify specific files ending with .proto
-  - grpckit/books # anything not ending in .proto is considered a directory, and will be searched for proto files
+sources: # all sources will be passed together
+  - grpckit/accounts  # non-proto entries will be searched for proto files, relative to root dir.
+  - grpckit/books/books.proto  # you can specify specific files ending with .proto
   - grpckit/base.proto
-output: .gen # .gen is the default output directory
+output: gen # gen is the default output directory (should be gitignored)
 plugins:
 - name: go
   output: .gen-go # you can override outputs on a per-plugin basis
 descriptors:
-  enable: true # defaults to true, descriptors are useful
-  source: true
-  comments: true
+  output: gen/descriptors.pb # defaults to descriptors.pb in root output directory
+  enabled: true # defaults to true, descriptors are useful
+  include_imports: true
+  include_source_info: true
+debug: true # debug will output command line information
+dry_run: false # if true, don't execute the protoc command. useful with debug.

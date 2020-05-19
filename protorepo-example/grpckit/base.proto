@@ -1,3 +1,9 @@
+syntax = "proto3";
+
+package base;
+
+option go_package = "github.com/grpckit/omniproto/gen";
+
 // Base just does its thing
 message Base {
   // ID is the ID of the User
