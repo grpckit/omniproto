@@ -10,6 +10,8 @@ and a docker execute step as part of your toolchain:
 
 `docker run -v $(pwd):/workspace --rm grpckit/omniproto`
 
+See [omniproto.yaml](omniproto.yaml) for reference.
+
 ## How It Works
 
 `omniproto` is designed to work with a protorepo, meaning you or your
