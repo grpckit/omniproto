@@ -15,4 +15,4 @@
 # vendor/
 
 gen/
-.gen-go/
+gen-py/
