@@ -6,8 +6,9 @@ sources: # all sources will be passed together
 output: gen # gen is the default output directory (should be gitignored)
 plugins:
 - name: go # the name of the plugin will be suffixed with _out, i.e. go_out.
+  args: paths=source_relative # args will be passed in to the plugin flag
 - name: validate
-  args: lang=go # args will be passed in to the plugin flag
+  args: lang=go
 - name: python
   output: gen-py # you can override outputs on a per-plugin basis
 descriptors:

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package accounts;
 
-option go_package = "github.com/grpckit/omniproto/gen";
+option go_package = "github.com/grpckit/accounts";
 
 // user represents a single account item. It has an id,
 // name and active flag

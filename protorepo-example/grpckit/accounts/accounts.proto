@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package accounts;
 
-option go_package = "github.com/grpckit/omniproto/gen";
+option go_package = "github.com/grpckit/accounts";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";

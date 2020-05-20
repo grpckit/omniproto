@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package books;
 
-option go_package = "github.com/grpckit/omniproto/gen";
+option go_package = "github.com/grpckit/books";
 
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
