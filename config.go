@@ -29,6 +29,8 @@ type Config struct {
 	Plugins     []Plugin
 	Debug       bool
 	DryRun      bool `mapstructure:"dry_run"`
+	// Enable experimental flag to build proto3 optionals
+	EnableProto3OptionalFields bool `mapstructure:"experimental_allow_proto3_optional"`
 }
 
 // ReadConfig reads a config file and returns a
@@ -38,6 +40,7 @@ func ReadConfig() (*Config, error) {
 	viper.SetDefault("output", "gen")
 	viper.SetDefault("debug", false)
 	viper.SetDefault("dry_run", false)
+	viper.SetDefault("experimental_allow_proto3_optional", false)
 	viper.SetDefault("descriptors", Descriptors{Enabled: true, IncludeImports: true, IncludeSourceInfo: true})
 
 	viper.SetConfigName("omniproto")

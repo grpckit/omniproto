@@ -23,6 +23,10 @@ func GenProtoString(config *Config) string {
 		b.WriteString(fmt.Sprintf("--%v_out=%v%v%v", plugin.Name, getArgs(plugin), getOutputForPlugin(plugin, config), space))
 	}
 
+	if config.EnableProto3OptionalFields {
+		b.WriteString("--experimental_allow_proto3_optional" + space)
+	}
+
 	if config.Descriptors.Enabled {
 		if len(config.Descriptors.Output) > 0 {
 			b.WriteString(fmt.Sprintf("--descriptor_set_out=%v%v", config.Descriptors.Output, space))
