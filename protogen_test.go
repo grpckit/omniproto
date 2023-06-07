@@ -17,7 +17,8 @@ func TestCanGenerateFromExampleConfig(t *testing.T) {
 	assert.NotEmpty(t, result)
 
 	assert.Contains(t, result, "-Iprotorepo-example")
-	assert.Contains(t, result, "--go_out=.gen-go")
+	assert.Contains(t, result, "--go_out=gen")
+	assert.Contains(t, result, "--go_opt=paths=source_relative")
 	assert.Contains(t, result, "--include_imports")
 	assert.Contains(t, result, "grpckit/accounts/user.proto")
 	assert.Contains(t, result, "grpckit/base.proto")

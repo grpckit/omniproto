@@ -21,6 +21,7 @@ func GenProtoString(config *Config) string {
 
 	for _, plugin := range config.Plugins {
 		b.WriteString(fmt.Sprintf("--%v_out=%v%v%v", plugin.Name, getArgs(plugin), getOutputForPlugin(plugin, config), space))
+		b.WriteString(getOpts(plugin))
 	}
 
 	if config.EnableProto3OptionalFields {
@@ -52,6 +53,18 @@ func getArgs(plugin Plugin) string {
 		return fmt.Sprintf("%v:", plugin.Args)
 	}
 	return ""
+}
+
+func getOpts(plugin Plugin) string {
+	if len(plugin.Opts) == 0 {
+		return ""
+	}
+
+	var flags []string
+	for _, opt := range plugin.Opts {
+		flags = append(flags, fmt.Sprintf("--%v_opt=%v", plugin.Name, opt))
+	}
+	return strings.Join(flags, space) + space
 }
 
 func writeSources(config *Config, b *strings.Builder) {

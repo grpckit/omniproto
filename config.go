@@ -18,6 +18,11 @@ type Plugin struct {
 	Name   string
 	Output string
 	Args   string
+	// Each will get rendered as it's own --plugin_opt=arg flag. The plugin
+	// must support this - not all do.
+	//
+	// Ref: https://github.com/protocolbuffers/protobuf/blob/fa5a69e73b0dd667ff15062adbc170310d440ee9/src/google/protobuf/compiler/command_line_interface.h#L174
+	Opts []string
 }
 
 // Config represents an omniproto configuration
