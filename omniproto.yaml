@@ -6,7 +6,11 @@ sources: # all sources will be passed together
 output: gen # gen is the default output directory (should be gitignored)
 plugins:
 - name: go # the name of the plugin will be suffixed with _out, i.e. go_out.
-  args: paths=source_relative # args will be passed in to the plugin flag
+  opts:
+    # opts will be passed in to the plugin flag, assuming the plugin supports
+    # --plugin_opt
+    # Ref: https://github.com/protocolbuffers/protobuf/blob/fa5a69e73b0dd667ff15062adbc170310d440ee9/src/google/protobuf/compiler/command_line_interface.h#L174
+    - paths=source_relative 
 - name: validate
   args: lang=go
 - name: python
